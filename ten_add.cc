@@ -48,14 +48,14 @@ public:
 		__m256 value1;
 		__m256 value2;
 		__m256 wyn;
-		if(N > 8){
+		if(N >= 8){
 			for(int i = 0; i < N/8; ++i, raw_first_input+=8, raw_second_input+=8, raw_output+=8){
 				value1 = _mm256_loadu_ps(raw_first_input);
 				value2 = _mm256_loadu_ps(raw_second_input);
 				wyn = _mm256_add_ps(value1, value2);
 				_mm256_storeu_ps(raw_output, wyn);
 			}
-			for(int i = N - N % 8 -1 ; i < N; ++i){
+			for(int i = N - N % 8; i < N; ++i){
 				output_flat(i) = first_input(i) + second_input(i);
 			}	
 		}else{
