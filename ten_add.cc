@@ -12,7 +12,7 @@ using shape_inference::ShapeHandle;
 REGISTER_OP("TenAdd")
 	.Input("input_tensor_a: float")
 	.Input("input_tensor_b: float")
-	.Output("zeroed: float")
+	.Output("sumed_tensor: float")
 	.SetShapeFn([](InferenceContext* c) {
 		ShapeHandle cur = c->input(0);
 		for (int i = 0; i < c->num_inputs(); ++i) {
