@@ -16,9 +16,9 @@ REGISTER_OP("TenAdd")
 	.SetShapeFn([](InferenceContext* c) {
 		ShapeHandle cur = c->input(0);
 		for (int i = 0; i < c->num_inputs(); ++i) {
-        	TF_RETURN_WITH_CONTEXT_IF_ERROR(c->Merge(c->input(i), cur, &cur),
-                                        "From merging shape ", i,
-                                        " with other shapes.");
+        		TF_RETURN_WITH_CONTEXT_IF_ERROR(c->Merge(c->input(i), cur, &cur),
+							"From merging shape ", i,
+							" with other shapes.");
 		}		
 		c->set_output(0, c->input(0));
 		
@@ -55,7 +55,7 @@ public:
 				wyn = _mm256_add_ps(value1, value2);
 				_mm256_storeu_ps(raw_output, wyn);
 			}
-			for(int i = N/8; i < N; ++i){
+			for(int i = N - N % 8 -1 ; i < N; ++i){
 				output_flat(i) = first_input(i) + second_input(i);
 			}	
 		}else{
